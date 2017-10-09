@@ -6,5 +6,4 @@
 #'
 #'
 #' @import rlang
-#' @importFrom stats setNames update
 "_PACKAGE"

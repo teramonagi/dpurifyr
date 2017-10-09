@@ -2,8 +2,12 @@ Package: dpurifyr
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Author: Nagi Teramo
+Maintainer: Nagi Teramo<teramonagi@gmail.com>
 Description: More about what it does (maybe more than one line)
-License: What license is it under?
+License: MIT
 LazyData: TRUE
+Suggests:
+    testthat,
+    magrittr
+RoxygenNote: 5.0.1
