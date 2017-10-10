@@ -9,8 +9,8 @@ scale.data.frame <- function(.data, ..., center=TRUE, scale=TRUE)
 
 scale_numeric <- function(x, center, scale)
 {
-  m <- mean(x)
-  s <- sd(x)
+  m <- base::mean(x)
+  s <- stats::sd(x)
   preprocessing <- structure(list(mean=m, std=s), class="dpurifyr.scale")
   structure(list(data=(x-m)/s, preprocessing=preprocessing))
 }
