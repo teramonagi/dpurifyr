@@ -3,9 +3,9 @@ preprocessing_chain <- function(.data)
   attr(.data, "chain")
 }
 
-#' @importFrom tidyselect vars_select
 apply_preprocessing <- function(.data, ..., func)
 {
+  # Get selected columns using the backend of dplyr's select
   selected_cols <- tidyselect::vars_select(names(.data), ...)
   # run pre-processing for all selected columns
   preprocessed <- lapply(.data[, selected_cols, drop=FALSE], func)

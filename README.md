@@ -22,8 +22,13 @@ devtools::install_github("teramonagi/dpurifyr")
 ## Usage
 ```r
 library("dpurifyr")
-dpurifyr::scale(head(iris), Sepal.Width, Petal.Length) %>% 
-  dpurifyr::scale(Sepal.Length) %>% dpurifyr::scale(Sepal.Length)
+# Create Data Pre-Processing chain
+pp <- dpurifyr::scale_standard(head(iris), Sepal.Width, Petal.Length) %>% 
+  dpurifyr::scale_standard(Sepal.Length) %>% 
+  dpurifyr::scale_minmax(Petal.Width)
+  
+# Behave like data.frame object
+head(pp)
 ```
 
 ## Contribution

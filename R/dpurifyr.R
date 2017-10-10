@@ -6,4 +6,5 @@
 #'
 #'
 #' @import rlang
+#' @importFrom tidyselect vars_select
 "_PACKAGE"
