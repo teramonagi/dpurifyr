@@ -27,4 +27,4 @@ dpurifyr::scale(head(iris), Sepal.Width, Petal.Length) %>%
 ```
 
 ## Contribution
-If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
+- If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
