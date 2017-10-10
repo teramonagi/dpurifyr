@@ -4,11 +4,11 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/dpurifyr)](http://cran.r-project.org/package=dpurifyr) 
 
 ## Overview
-dpurifyr package gives you a practical way for `data preprocessing` providing a consistent set of verbs that help you solve the most common data preprocessing challenges.
+*dpurifyr* package gives you a practical way for `data preprocessing` providing a consistent set of verbs that help you solve the most common data preprocessing challenges.
 
 ## Installation
 You can install from CRAN with:
-``` r
+```r
 # Not yet
 # install.packages("dpurifyr")
 ```
@@ -20,7 +20,7 @@ devtools::install_github("teramonagi/dpurifyr")
 ```
 
 ## Usage
-```
+```r
 library("dpurifyr")
 dpurifyr::scale(head(iris), Sepal.Width, Petal.Length) %>% 
   dpurifyr::scale(Sepal.Length) %>% dpurifyr::scale(Sepal.Length)

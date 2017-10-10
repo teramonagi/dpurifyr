@@ -1,6 +1,10 @@
 #' @export
 scale <- function (x, center=TRUE, scale=TRUE){UseMethod("scale")}
 
+#' Get JPGIS2.1 Data
+#'
+#' @param .data
+#'
 #' @export
 scale.data.frame <- function(.data, ..., center=TRUE, scale=TRUE)
 {

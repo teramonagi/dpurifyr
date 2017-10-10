@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Nagi Teramo
 Maintainer: Nagi Teramo<teramonagi@gmail.com>
 Description: More about what it does (maybe more than one line)
-License: MIT
+License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
     rlang,

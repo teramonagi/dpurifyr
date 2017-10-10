@@ -4,7 +4,10 @@
 \name{reexports}
 \alias{\%>\%}
 \alias{reexports}
-\title{Objects exported from other packages}
+\title{Automatically import `%>%` opeator when call library("dpurifyr")}
+\description{
+Automatically import `%>%` opeator when call library("dpurifyr")
+}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
