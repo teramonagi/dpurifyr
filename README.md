@@ -25,10 +25,18 @@ library("dpurifyr")
 # Create Data Pre-Processing chain
 pp <- dpurifyr::scale_standard(head(iris), Sepal.Width, Petal.Length) %>% 
   dpurifyr::scale_standard(Sepal.Length) %>% 
-  dpurifyr::scale_minmax(Petal.Width)
-  
+  dpurifyr::scale_minmax(Petal.Width) 
+
 # Behave like data.frame object
 head(pp)
+
+# You can apply the same preprocessing to different data.frame
+pp <- dpurifyr::scale_standard(head(iris), Sepal.Width, Petal.Length) %>% 
+  dpurifyr::scale_standard(Sepal.Length) 
+a <- dpurifyr::apply(head(iris), pp, TRUE)
+
+# using the same parameter estimated in pp object.
+str(a)
 ```
 
 ## Contribution
