@@ -1,0 +1,18 @@
+Package: dpurifyr
+Type: Package
+Title: A Practical Way for Data Preprocessing using R
+Version: 0.1.0
+Author: Nagi Teramo
+Maintainer: Nagi Teramo<teramonagi@gmail.com>
+Description: A Practical Way for Data Preprocessing using R
+URL: https://github.com/teramonagi/dpurifyr
+BugReports: https://github.com/teramonagi/dpurifyr/issues
+License: MIT + file LICENSE
+LazyData: TRUE
+Imports:
+    magrittr,
+    purrr,
+    tidyselect
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
