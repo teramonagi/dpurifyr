@@ -4,11 +4,12 @@ Title: A Practical Way for Data Preprocessing using R
 Version: 0.1.0
 Author: Nagi Teramo
 Maintainer: Nagi Teramo<teramonagi@gmail.com>
-Description: More about what it does (maybe more than one line)
+Description: A Practical Way for Data Preprocessing using R
+URL: https://github.com/teramonagi/dpurifyr
+BugReports: https://github.com/teramonagi/dpurifyr/issues
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
-    rlang,
     magrittr,
     purrr,
     tidyselect

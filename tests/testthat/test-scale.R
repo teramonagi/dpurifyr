@@ -20,6 +20,7 @@ test_that("scale_minmax results agree with its definition", {
   for(rng in list(c(0, 1), c(-1, 1))){
     pp <- dpurifyr::scale_minmax(df, Sepal.Width, range=rng)
     x <- df$Sepal.Width
+    # Check with its definition
     answer <- (x - min(x)) / (max(x) - min(x)) * abs(diff(rng)) + min(rng)
     expect_almost_equal(pp$Sepal.Width,  answer, tolerance=1e-4)
     expect_equal(nrow(pp), nrow(df))

@@ -2,9 +2,8 @@
 % Please edit documentation in R/dpurifyr.R
 \docType{package}
 \name{dpurifyr-package}
-\alias{dpurifyr}
 \alias{dpurifyr-package}
-\title{dpurifyr: a practical way for data preprocessing}
+\title{dpurifyr: A practical way for data preprocessing}
 \description{
 dpurifyr package gives you a practical way for `data preprocessing`
 providing a consistent set of verbs that

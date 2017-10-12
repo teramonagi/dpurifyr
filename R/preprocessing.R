@@ -1,9 +1,28 @@
+#' Apply preprocessing object to new data (tbl)
+#'
+#' Returns a new preprocessing object obtained by applying a preprocessing object to new data
+#'
+#' @param .data
+#'  a tbl.
+#' @param pp
+#'  preprocessing object
+#' @param use_param
+#'  A logical value. Wether use the same parameter created by preprocessing object
+#'
+#' @return
+#'  An object of the same class as .data with "preprocessing-chain" attribution.
+#'
+#' @export
+apply <- function(.data, pp, use_param=TRUE)
+{
+  apply_chain(.data, preprocessing_chain(pp), use_param)
+}
+
 preprocessing_chain <- function(.data)
 {
   attr(.data, "preprocessing-chain")
 }
 
-#' @importFrom dplyr if_else
 apply_chain <- function(.data, chain, use_param)
 {
   if(!is.null(chain$previous)){
@@ -21,11 +40,6 @@ apply_chain <- function(.data, chain, use_param)
   enchain(.data, cs, preprocessing_chain(.data))
 }
 
-#' @export
-apply <- function(.data, pp, use_param=TRUE)
-{
-  apply_chain(.data, preprocessing_chain(pp), use_param)
-}
 
 apply_preprocessing <- function(.data, ..., func, arg)
 {

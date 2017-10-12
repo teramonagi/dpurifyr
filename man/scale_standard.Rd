@@ -2,15 +2,35 @@
 % Please edit documentation in R/scale.R
 \name{scale_standard}
 \alias{scale_standard}
-\title{Standardize each columns by removing the mean and scaling to unit standard deviation}
+\title{Standardizing tbl}
 \usage{
 scale_standard(.data, ..., center = TRUE, scale = TRUE)
 }
 \arguments{
-\item{.data}{}
+\item{.data}{A tbl.}
+
+\item{...}{One or more unquoted expressions separated by commas. You can treat variable names like they are positions.
+It supports [dplyr::select]  comparable.}
+
+\item{center}{A logical value.}
+
+\item{scale}{A logical value.}
+}
+\value{
+An object of the same class as .data with "preprocessing-chain" attribution.
 }
 \description{
-Centering and scaling happen independently on each feature by computing the relevant statistics on .
+Standardize each columns by removing the mean and scaling to unit standard deviation
+Centering and scaling happen independently on each columns which you selected.
 Mean and standard deviation are then stored to be used on later data using the transform method.
+}
+\details{
+The value of `center` determines how column centering is performed.
+If center is TRUE then centering is done by subtracting the column means (omitting NAs) of x from their corresponding columns,
+and if center is FALSE, no centering is done.
+
+The value of `scale` determines how column scaling is performed (after centering).
+If scale is TRUE then scaling is done by dividing the (centered) columns of x by their standard deviations if center is TRUE,
+and the root mean square otherwise. If scale is FALSE, no scaling is done.
 }
 
