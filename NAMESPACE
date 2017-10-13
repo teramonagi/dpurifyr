@@ -2,6 +2,8 @@
 
 export("%>%")
 export(apply)
+export(encode_count)
+export(encode_label)
 export(scale_minmax)
 export(scale_standard)
 importFrom(magrittr,"%>%")
