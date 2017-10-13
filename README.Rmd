@@ -13,41 +13,46 @@ knitr::opts_chunk$set(
 ```
 # dpurifyr
 
-[![Build Status](https://travis-ci.org/teramonagi/dpurifyr.svg?branch=master)](https://travis-ci.org/teramonagi/dpurifyr)
+å[![Build Status](https://travis-ci.org/teramonagi/dpurifyr.svg?branch=master)](https://travis-ci.org/teramonagi/dpurifyr)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/dpurifyr)](http://cran.r-project.org/package=dpurifyr) 
 
 ## Overview
-*dpurifyr* package gives you a practical way for `data preprocessing` providing a consistent set of verbs that help you solve the most common data preprocessing challenges.
+dpurifyr package gives you a practical way for `data preprocessing` providing a consistent set of verbs that help you solve the most common data preprocessing challenges.
 
 ## Installation
 You can install from CRAN with:
-```r
+```{r gh-installation, eval = FALSE}
 # Not yet
 # install.packages("dpurifyr")
-```
 
-Or try the development version from GitHub with:
-```r
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("teramonagi/dpurifyr")
 ```
 
-## Usage
-```r
+## Example
+The following example uses dpurifyr to solve a fairly realistic problem: apply different types of data preprocessing (`standard_scale` and `scale_minmax`) to columns (`dplyr::starts_with("Sepal")` and `Petal.Width`) selected by the way which is consistent with other tidyverse packages.
+
+```{r example-1, message=FALSE}
 library("dpurifyr")
-# Create Data Pre-Processing chain
-pp <- dpurifyr::scale_standard(as_tibble(head(iris)), Sepal.Width, Petal.Length) %>% 
-  dpurifyr::scale_standard(Sepal.Length) %>% 
+df <- head(iris)
+# Create Data Pre-Processing chain while data preproessing for df is done.
+pp <- dpurifyr::scale_standard(df, dplyr::starts_with("Sepal")) %>% 
   dpurifyr::scale_minmax(Petal.Width) 
 
-# Behave like data.frame object
+# PreProcessing object(pp) behave like data.frame object
 head(pp)
+```
 
+Once you get `preprocessing` object, `preprocessing` object can be applied to the other data.
+This means that you can apply the same `preprocessing` with fixed parameter to other data. 
+```{r example-2, message=FALSE}
 # You can apply the same preprocessing to different data.frame
 pp <- dpurifyr::scale_standard(head(iris), Sepal.Width, Petal.Length) %>% 
   dpurifyr::scale_standard(Sepal.Length) 
-pp2 <- dpurifyr::apply(head(iris, 10), pp, TRUE) # Using the same parameters estimated in pp object.
-str(pp2)
+# Using the same parameters( `use_param=TRUE`) estimated in pp object.
+pp2 <- dpurifyr::apply(head(iris, 10), pp, TRUE) 
+pp2
 ```
 
 ## Contribution
