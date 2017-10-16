@@ -12,6 +12,9 @@ LazyData: TRUE
 Imports:
     magrittr,
     purrr,
+    tibble,
+    dplyr,
+    stringr,
     tidyselect
 Suggests:
     testthat

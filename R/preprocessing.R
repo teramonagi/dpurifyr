@@ -53,7 +53,20 @@ apply_preprocessing_with_selected_cols <- function(.data, selected_cols, func)
   # run pre-processing for all selected columns
   preprocessed <- lapply(.data[, selected_cols, drop=FALSE], func)
   # Assign Data and make "preprocessing" object
-  .data[, selected_cols] <- purrr::map(preprocessed, "data")
+  data <- purrr::map(preprocessed, "data")
+  for(i in seq_along(data)){
+    if(is.data.frame(data[[i]])){
+      # Change names to "variablename__seperator__classname" style
+      df <- data[[i]]
+      names(df) <- paste0(selected_cols[i], names(df))
+      # Insert df into .data at the point of "selected_cols[i]"
+      index <- which(selected_cols[i] == names(.data))
+      .data <- tibble::as_data_frame(append(.data, df, index))[, -index]
+    } else{
+      .data[, selected_cols[i]] <- data[[i]]
+    }
+  }
+  # Enchain current preprocessing with previous preproessing
   enchain(.data, purrr::map(preprocessed, "preprocessing"), preprocessing_chain(.data))
 }
 

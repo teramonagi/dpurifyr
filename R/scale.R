@@ -70,7 +70,7 @@ standard_ <- function(x, arg, param=NULL)
 scale_minmax <- function(.data, ..., range=c(0, 1))
 {
   range <- sort(range)
-  apply_preprocessing(.data, ...,func= minmax_, arg=list(range=range))
+  apply_preprocessing(.data, ...,func=minmax_, arg=list(range=range))
 }
 
 minmax_ <- function(x, arg, param=NULL)
