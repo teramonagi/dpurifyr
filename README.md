@@ -1,17 +1,21 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+dpurifyr
+========
 
-# dpurifyr
+[![Build Status](https://travis-ci.org/teramonagi/dpurifyr.svg?branch=master)](https://travis-ci.org/teramonagi/dpurifyr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/dpurifyr)](http://cran.r-project.org/package=dpurifyr)
 
-[![Build Status](https://travis-ci.org/teramonagi/dpurifyr.svg?branch=master)](https://travis-ci.org/teramonagi/dpurifyr)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/dpurifyr)](http://cran.r-project.org/package=dpurifyr) 
+Overview
+--------
 
-## Overview
 dpurifyr package gives you a practical way for `data preprocessing` providing a consistent set of verbs that help you solve the most common data preprocessing challenges.
 
-## Installation
+Installation
+------------
+
 You can install from CRAN with:
 
-```r
+``` r
 # Not yet
 # install.packages("dpurifyr")
 
@@ -20,11 +24,12 @@ You can install from CRAN with:
 devtools::install_github("teramonagi/dpurifyr")
 ```
 
-## Example
+Example
+-------
+
 The following example uses dpurifyr to solve a fairly realistic problem: apply different types of data preprocessing (`standard_scale` and `scale_minmax`) to columns (`dplyr::starts_with("Sepal")` and `Petal.Width`) selected by the way which is consistent with other tidyverse packages.
 
-
-```r
+``` r
 library("dpurifyr")
 df <- head(iris)
 # Create Data Pre-Processing chain while data preproessing for df is done.
@@ -42,10 +47,9 @@ head(pp)
 #> 6    1.5619728   1.5062037          1.7           1  setosa
 ```
 
-Once you get `preprocessing` object, `preprocessing` object can be applied to the other data.
-This means that you can apply the same `preprocessing` with fixed parameter to other data. 
+Once you get `preprocessing` object, `preprocessing` object can be applied to the other data. This means that you can apply the same `preprocessing` with fixed parameter to other data.
 
-```r
+``` r
 # You can apply the same preprocessing to different data.frame
 pp <- dpurifyr::scale_standard(head(iris), Sepal.Width, Petal.Length) %>% 
   dpurifyr::scale_standard(Sepal.Length) 
@@ -65,5 +69,7 @@ pp2
 #> 10   -0.1735525 -0.82598269    0.3627381         0.1  setosa
 ```
 
-## Contribution
-- If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
+Contribution
+------------
+
+-   If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
