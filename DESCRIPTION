@@ -15,6 +15,7 @@ Imports:
     tibble,
     dplyr,
     stringr,
+    lubridate,
     tidyselect
 Suggests:
     testthat

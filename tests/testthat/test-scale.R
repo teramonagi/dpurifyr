@@ -10,6 +10,10 @@ test_that("scale_standarad results agree with base::scale as value", {
   pp <- dpurifyr::scale_standard(df, Sepal.Width, Petal.Length)
   expect_almost_equal(pp$Sepal.Width,  base::scale(df$Sepal.Width), tolerance=0.001)
   expect_almost_equal(pp$Petal.Length, base::scale(df$Petal.Length), tolerance=0.001)
+  #Unchanged colmn should be matched to the original data(df)
+  for(col in c("Sepal.Length", "Petal.Width", "Species")){
+    expect_equal(pp[, col], df[, col])
+  }
   expect_equal(nrow(pp), nrow(df))
   expect_equal(ncol(pp), ncol(df))
   expect_named(pp, names(iris))

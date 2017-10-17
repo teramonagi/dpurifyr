@@ -93,8 +93,8 @@ onehot_ <- function(x, arg, param=NULL)
   # Maps of class <--> its index
   index <- stats::setNames(seq_along(class), class)
   # Assine 1 value to matched column corresponding to categorical value
-  xm <- matrix(0, nrow=length(x), ncol=length(class))
+  xm <- matrix(0, nrow=length(x), ncol=length(class), dimnames=list(NULL, class))
   xm[cbind(seq_along(x), index[x])] <- 1
-  new_preprocessing(stats::setNames(as.data.frame(xm), paste0(arg$separator, class)), onehot_, param, arg)
+  new_preprocessing(add_prefix_to_name(as.data.frame(xm), arg$separator), onehot_, param, arg)
 }
 
