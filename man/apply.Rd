@@ -19,4 +19,3 @@ An object of the same class as .data with "preprocessing-chain" attribution.
 \description{
 Returns a new preprocessing object obtained by applying a preprocessing object to new data
 }
-

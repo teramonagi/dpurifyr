@@ -10,13 +10,18 @@ BugReports: https://github.com/teramonagi/dpurifyr/issues
 License: MIT + file LICENSE
 LazyData: TRUE
 Imports:
-    magrittr,
+    lubridate,
     purrr,
     tibble,
+    tidyselect,
+    magrittr,
     dplyr,
-    stringr,
-    lubridate,
-    tidyselect
+    tidyr
 Suggests:
-    testthat
-RoxygenNote: 5.0.1
+    testthat,
+    knitr, 
+    rmarkdown,
+    titanic,
+    xgboost
+VignetteBuilder: knitr    
+RoxygenNote: 6.0.1

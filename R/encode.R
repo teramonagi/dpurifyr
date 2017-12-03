@@ -7,6 +7,9 @@
 #' @param ...
 #'  One or more unquoted expressions separated by commas. You can treat variable names like they are positions.
 #'  It supports [dplyr::select]  comparable.
+#' @param start
+#'  Integer, default 0.
+#'  label starts.
 #'
 #' @return
 #'  An object of the same class as .data with "preprocessing-chain" attribution.
@@ -15,9 +18,9 @@
 #' The mapped value start from 1 (not 0).
 #'
 #' @export
-encode_label <- function(.data, ...)
+encode_label <- function(.data, ..., start=0)
 {
-  apply_preprocessing(.data, ..., func=label_, arg=NULL)
+  apply_preprocessing(.data, ..., func=label_, arg=list(start=start))
 }
 
 label_ <- function(x, arg, param=NULL)
@@ -26,7 +29,7 @@ label_ <- function(x, arg, param=NULL)
     param <- list(levels=sort(unique(x)))
   }
 
-  new_preprocessing(match(x, param$levels), label_, param, arg)
+  new_preprocessing(match(x, param$levels)-1+arg$start, label_, param, arg)
 }
 
 #' Replace labels with their count in the data set
@@ -71,6 +74,9 @@ count_ <- function(x, arg, param=NULL)
 #' @param ...
 #'  One or more unquoted expressions separated by commas. You can treat variable names like they are positions.
 #'  It supports [dplyr::select] comparable.
+#' @param drop_first
+#'  bool, default TRUE
+#'  Whether to get k-1 dummies out of k categorical levels (factor) by removing the first level.
 #' @param sep
 #'  Separator between columns.
 #'
@@ -78,16 +84,16 @@ count_ <- function(x, arg, param=NULL)
 #'  An object of the same class as .data with "preprocessing-chain" attribution.
 #'
 #' @export
-encode_onehot <- function(.data, ..., sep="_")
+encode_onehot <- function(.data, ..., drop_first=TRUE, sep="_")
 {
-  apply_preprocessing(.data, ..., func=onehot_, arg=list(separator=sep))
+  apply_preprocessing(.data, ..., func=onehot_, arg=list(drop_first=drop_first, separator=sep))
 }
 
 onehot_ <- function(x, arg, param=NULL)
 {
   x <- as.character(x)
   if(is.null(param)){
-    param <- list(class=unique(x))
+    param <- list(class=sort(unique(x)))
   }
   class <- param$class
   # Maps of class <--> its index
@@ -95,6 +101,10 @@ onehot_ <- function(x, arg, param=NULL)
   # Assine 1 value to matched column corresponding to categorical value
   xm <- matrix(0, nrow=length(x), ncol=length(class), dimnames=list(NULL, class))
   xm[cbind(seq_along(x), index[x])] <- 1
-  new_preprocessing(add_prefix_to_name(as.data.frame(xm), arg$separator), onehot_, param, arg)
+  df <- as.data.frame(xm)
+  if(arg$drop_first){
+    df <- df[, -1]
+  }
+  new_preprocessing(add_prefix_to_name(df, arg$separator), onehot_, param, arg)
 }
 

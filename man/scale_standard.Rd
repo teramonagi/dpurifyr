@@ -33,4 +33,3 @@ The value of `scale` determines how column scaling is performed (after centering
 If scale is TRUE then scaling is done by dividing the (centered) columns of x by their standard deviations if center is TRUE,
 and the root mean square otherwise. If scale is FALSE, no scaling is done.
 }
-

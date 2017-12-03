@@ -22,4 +22,3 @@ Simply converting each values (character or factor) in a column to the count of 
 It can be sensitive to outliers.
 It might be a good strategy to add log-transformation
 }
-

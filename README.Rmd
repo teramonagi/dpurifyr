@@ -57,3 +57,23 @@ pp2
 
 ## Contribution
 - If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
+
+
+## Citation
+
+To cite package `dpurifyr` in publications use:
+
+```
+Nagi Teramo, Shinichi Takayanagi (2017). dpurifyr: A grammar of data preprocessing. R package version 0.1.0. https://github.com/teramonagi/dpurifyr
+```
+
+A BibTeX entry for LaTeX users is
+```
+@Manual{,
+  title = {dpurifyr: A grammar of data preprocessing},
+  author = {Nagi Teramo, Shinichi Takayanagi},
+  year = {2017}, 
+  note = {R package version 0.1.0},
+  url = {https://github.com/teramonagi/dpurifyr},
+}
+```

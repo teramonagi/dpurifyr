@@ -27,4 +27,3 @@ The transformation is given by:
 
 This transformation is often used as an alternative to zero mean, unit variance scaling.
 }
-

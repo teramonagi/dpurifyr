@@ -26,4 +26,3 @@ An object of the same class as .data with "preprocessing-chain" attribution.
 Split date object into 4 components(year, month, day and the day of week) to a format that
 works better when you want to specify the effect of year, month, day or the day of week.
 }
-

@@ -4,13 +4,16 @@
 \alias{encode_label}
 \title{Encode labels with value}
 \usage{
-encode_label(.data, ...)
+encode_label(.data, ..., start = 0)
 }
 \arguments{
 \item{.data}{A tbl.}
 
 \item{...}{One or more unquoted expressions separated by commas. You can treat variable names like they are positions.
 It supports [dplyr::select]  comparable.}
+
+\item{start}{Integer, default 0.
+label starts.}
 }
 \value{
 An object of the same class as .data with "preprocessing-chain" attribution.
@@ -21,4 +24,3 @@ Simply converting each values (character or factor) in a column to a specific nu
 \details{
 The mapped value start from 1 (not 0).
 }
-

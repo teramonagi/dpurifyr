@@ -25,4 +25,3 @@ An object of the same class as .data with "preprocessing-chain" attribution.
 Split date object into 8 components(year, month, day, the day of week, hour, minute, second and timezone)
 to a format that works better when you want to specify the effect of year, month, day, the day of week, hour, minute, second or timezone.
 }
-

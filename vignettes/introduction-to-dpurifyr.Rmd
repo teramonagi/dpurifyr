@@ -1,0 +1,112 @@
+---
+title: "Introduction to dpurifyr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to dpurifyr}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+```{r, cache=FALSE}
+knitr::opts_chunk$set(error = TRUE, warning = FALSE)
+```
+This document introduces you to dpurifyr’s basic set of tools, and shows you how to apply them to data frames. 
+At first, we load the libraries which we use in this vignettes.
+
+```{r, message=FALSE}
+library("tidyverse")
+library("titanic")
+library("xgboost")
+library("dpurifyr")
+```
+
+## Data: titanic
+
+To explore the basic data manipulation verbs of dpurifyr, we’ll use titanic data set from `titanic` package. 
+
+This dataset contains data of the real Titanic passengers. 
+Each row represents one person. 
+The columns describe different attributes about the person including whether they survived (Survived), their age (Age), 
+their sex (Sex) and so on.
+```{r}
+df <- titanic::titanic_train
+head(df)
+```
+
+In this vignettes, we use specific columns and select these using `dplyr::select()` :
+```{r}
+df <- dplyr::select(df, Survived, Pclass, Sex, Age, SibSp, Parch, Fare)
+```
+
+After that, we split `df` in to train, test data.
+```{r}
+# 70% data are training data
+index <- sample(seq_len(nrow(df)), 0.7*nrow(df))
+df_train <- df[index, ]
+df_test <- df[-index, ]
+```
+
+Here, we simply replace `NA` with its mean values using `tidy::replace_na()`.
+```{r}
+df_train <- replace_na(df_train, list(Age=mean(df_train$Age, na.rm=TRUE)))
+df_test <- replace_na(df_test,list(Age=mean(df_test$Age, na.rm=TRUE)))
+```
+
+## Simple usage of dpurifyr
+`glm()` is used to fit generalized linear models.
+It allows us to use a symbolic description of the linear predictor.
+```{r}
+lgt <- glm(Survived ~ ., data=df_train, family=binomial(link="logit"))
+```
+
+
+```{r}
+#Prepare data
+x <- dplyr::select(df_train, -Survived)
+y <- dplyr::select(df_train,  Survived)
+```
+
+But, `xgboost` which is the algorithm that wins every competition does not.
+```{r eval=FALSE}
+xgboost(data=x, label=y, objective = "binary:logistic")
+```
+```
+Error in xgb.get.DMatrix(data, label, missing, weight) : 
+  xgboost only support numerical matrix input,
+           use 'data.matrix' to transform the data.
+In addition: Warning message:
+In xgb.get.DMatrix(data, label, missing, weight) :
+  xgboost: label will be ignored.
+```
+
+This is caused by the limitation of `xgboost` library which does not allow to use `factor`, `string`.
+In this case, we can utilize `dpurifyr` package.
+`dpurifyr` offers a lot of preprocessing functions.
+You can convert original data `x` into matrix form data `x_data` using `dpurifyr` package.
+```{r}
+x_train <- x %>% 
+  dpurifyr::encode_label(Sex) %>% 
+  dpurifyr::encode_onehot(Pclass) %>%
+  dpurifyr::to_matrix()
+y_train <- dpurifyr::to_vector(y)
+```
+
+As a result, you can put data into `xgboost()`:
+```{r}
+bst <- xgboost(data=x_train, label=y_train, nrounds=2, objective="binary:logistic")
+bst
+```
+
+## Using the same preprocessing with train data to test data
+After preprocessing, you get `x_train` object in the previous section.
+`dpurifyr::apply()` allows users to do the same preprocessing with `x_train` to the other data (here, `x_test`):
+```{r}
+# Create x_test object like x_train
+x_test <- dplyr::select(df_test, -Survived) %>%
+  dpurifyr::apply(x_train)
+# Create y_test like _train
+y_test <- unlist(dplyr::select(df_test,  Survived))
+```
+
+```{r}
+bst <- xgboost(data=x_test, label=y_test, nrounds=2, objective="binary:logistic")
+```

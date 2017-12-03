@@ -4,13 +4,16 @@
 \alias{encode_onehot}
 \title{Encode categorical data using a one-hot aka one-of-K scheme}
 \usage{
-encode_onehot(.data, ..., sep = "_")
+encode_onehot(.data, ..., drop_first = TRUE, sep = "_")
 }
 \arguments{
 \item{.data}{A tbl.}
 
 \item{...}{One or more unquoted expressions separated by commas. You can treat variable names like they are positions.
 It supports [dplyr::select] comparable.}
+
+\item{drop_first}{bool, default TRUE
+Whether to get k-1 dummies out of k categorical levels (factor) by removing the first level.}
 
 \item{sep}{Separator between columns.}
 }
@@ -21,4 +24,3 @@ An object of the same class as .data with "preprocessing-chain" attribution.
 Transforms categorical data (factor or character ot integer) to a format that
 works better with classification and regression algorithms.
 }
-
