@@ -28,20 +28,3 @@ to_vector <- function(.data)
 {
   c(unlist(.data))
 }
-
-#' Printing Preprocessing object
-#'
-#' Print a preprocessed object.
-#'
-#' @param x
-#' object of class data.frame.
-#'
-#' @param ...
-#' optional arguments to print or plot methods.
-#'
-#' @export
-print.preprocessed_data <- function(x, ...)
-{
-  base::print(x[,], ...)
-}
-

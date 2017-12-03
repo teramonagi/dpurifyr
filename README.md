@@ -24,8 +24,8 @@ You can install from CRAN with:
 devtools::install_github("teramonagi/dpurifyr")
 ```
 
-Example
--------
+Simple Example
+--------------
 
 The following example uses dpurifyr to solve a fairly realistic problem: apply different types of data preprocessing (`standard_scale` and `scale_minmax`) to columns (`dplyr::starts_with("Sepal")` and `Petal.Width`) selected by the way which is consistent with other tidyverse packages.
 
@@ -69,7 +69,26 @@ pp2
 #> 10   -0.1735525 -0.82598269    0.3627381         0.1  setosa
 ```
 
+You can find more information in [vignettes](https://github.com/teramonagi/dpurifyr/blob/master/vignettes/introduction-to-dpurifyr.Rmd).
+
 Contribution
 ------------
 
 -   If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
+
+Citation
+--------
+
+To cite package `dpurifyr` in publications use:
+
+    Nagi Teramo, Shinichi Takayanagi (2017). dpurifyr: A grammar of data preprocessing. R package version 0.1.0. https://github.com/teramonagi/dpurifyr
+
+A BibTeX entry for LaTeX users is
+
+    @Manual{,
+      title = {dpurifyr: A grammar of data preprocessing},
+      author = {Nagi Teramo, Shinichi Takayanagi},
+      year = {2017}, 
+      note = {R package version 0.1.0},
+      url = {https://github.com/teramonagi/dpurifyr},
+    }

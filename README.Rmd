@@ -30,7 +30,7 @@ You can install from CRAN with:
 devtools::install_github("teramonagi/dpurifyr")
 ```
 
-## Example
+## Simple Example
 The following example uses dpurifyr to solve a fairly realistic problem: apply different types of data preprocessing (`standard_scale` and `scale_minmax`) to columns (`dplyr::starts_with("Sepal")` and `Petal.Width`) selected by the way which is consistent with other tidyverse packages.
 
 ```{r example-1, message=FALSE}
@@ -54,6 +54,8 @@ pp <- dpurifyr::scale_standard(head(iris), Sepal.Width, Petal.Length) %>%
 pp2 <- dpurifyr::apply(head(iris, 10), pp, TRUE) 
 pp2
 ```
+
+You can find more information in [vignettes](https://github.com/teramonagi/dpurifyr/blob/master/vignettes/introduction-to-dpurifyr.Rmd).
 
 ## Contribution
 - If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/teramonagi/dupurifyr/issues)
