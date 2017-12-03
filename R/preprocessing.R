@@ -128,3 +128,21 @@ new_preprocessing <- function(x, func, param, arg)
   preprocessing <- structure(list(func=func, param=param, arg=arg), class="preprocessing")
   structure(list(data=x, preprocessing=preprocessing))
 }
+
+#' Printing Preprocessing object
+#'
+#' Print a preprocessed object.
+#'
+#' @param x
+#' object of class data.frame.
+#'
+#' @param ...
+#' optional arguments to print or plot methods.
+#'
+#' @export
+print.preprocessed_data <- function(x, ...)
+{
+  class_x <- class(x)
+  class(x) <- class_x[class_x != "preprocessed_data"]
+  base::print(x[,], ...)
+}

@@ -109,4 +109,5 @@ y_test <- unlist(dplyr::select(df_test,  Survived))
 
 ```{r}
 bst <- xgboost(data=x_test, label=y_test, nrounds=2, objective="binary:logistic")
+bst
 ```
